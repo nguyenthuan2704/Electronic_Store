@@ -1,0 +1,971 @@
+﻿@*@model Electronic_Store.Models.customer*@
+<style type="text/css">
+    /* Shared */
+    .loginBtn {
+        box-sizing: border-box;
+        position: relative;
+        /* width: 13em;  - apply for fixed size */
+        margin: 0.2em;
+        padding: 0 15px 0 46px;
+        border: none;
+        text-align: left;
+        line-height: 34px;
+        white-space: nowrap;
+        border-radius: 0.2em;
+        font-size: 16px;
+        color: #fff;
+    }
+
+        .loginBtn:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 34px;
+            height: 100%;
+        }
+
+        .loginBtn:focus {
+            outline: none;
+        }
+
+        .loginBtn:active {
+            box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Facebook */
+    .loginBtn--facebook {
+        background-color: #4c69ba;
+        background-image: linear-gradient(#4c69ba, #3b55a0);
+        /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+        text-shadow: 0 -1px 0 #354c8c;
+    }
+
+        .loginBtn--facebook:before {
+            border-right: #364e92 1px solid;
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png") 6px 6px no-repeat;
+        }
+
+        .loginBtn--facebook:hover,
+        .loginBtn--facebook:focus {
+            background-color: #5b7bd5;
+            background-image: linear-gradient(#5b7bd5, #4864b1);
+        }
+
+    /* Google */
+    .loginBtn--google {
+        /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+        background: #dd4b39;
+    }
+
+        .loginBtn--google:before {
+            border-right: #bb3f30 1px solid;
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png") 6px 6px no-repeat;
+        }
+
+        .loginBtn--google:hover,
+        .loginBtn--google:focus {
+            background: #e74b37;
+        }
+</style>
+<!-- top-header -->
+<div class="agile-main-top">
+    <div class="container-fluid">
+        <div class="row main-top-w3l py-2">
+            <div class="col-lg-4 header-most-top">
+                <p class="text-white text-lg-left text-center">
+                    Offer Zone Top Deals & Discounts
+                    <i class="fas fa-shopping-cart ml-1"></i>
+                </p>
+            </div>
+            <div class="col-lg-8 header-right mt-lg-0 mt-2">
+                <!-- header lists -->
+                <ul>
+                    <li class="text-center border-right text-white">
+                        <a class="play-icon popup-with-zoom-anim text-white" href="#small-dialog1">
+                            <i class="fas fa-map-marker mr-2"></i>Select Location
+                        </a>
+                    </li>
+                    <li class="text-center border-right text-white">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
+                            <i class="fas fa-truck mr-2"></i>Track Order
+                        </a>
+                    </li>
+                    <li class="text-center border-right text-white">
+                        <i class="fas fa-phone mr-2"></i> 001 234 5678
+                    </li>
+                    @if (Session["Username"] == null)
+                    {
+                        <li class="text-center border-right text-white">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
+                                <i class="fas fa-sign-in-alt mr-2"></i> Log In
+                            </a>
+                        </li>
+                        <li class="text-center text-white">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Register
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="text-center border-right text-white">
+                            <a href="#" class="text-white">
+                                <i class="fas fa-user"></i> Welcome @Session["Username"]
+                            </a>
+                        </li>
+                        <li class="text-center text-white">
+                            <a href="@Url.Action("Logout","Home")" class="text-white">
+                                <i class="fas fa-power-off"></i> Logout
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <!-- //header lists -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal(select-location) -->
+<div id="small-dialog1" class="mfp-hide">
+    <div class="select-city">
+        <h3>
+            <i class="fas fa-map-marker"></i> Please Select Your Location
+        </h3>
+        <select class="list_of_cities">
+            <optgroup label="Popular Cities">
+                <option selected style="display:none;color:#eee;">Select City</option>
+                <option>Birmingham</option>
+                <option>Anchorage</option>
+                <option>Phoenix</option>
+                <option>Little Rock</option>
+                <option>Los Angeles</option>
+                <option>Denver</option>
+                <option>Bridgeport</option>
+                <option>Wilmington</option>
+                <option>Jacksonville</option>
+                <option>Atlanta</option>
+                <option>Honolulu</option>
+                <option>Boise</option>
+                <option>Chicago</option>
+                <option>Indianapolis</option>
+            </optgroup>
+            <optgroup label="Alabama">
+                <option>Birmingham</option>
+                <option>Montgomery</option>
+                <option>Mobile</option>
+                <option>Huntsville</option>
+                <option>Tuscaloosa</option>
+            </optgroup>
+            <optgroup label="Alaska">
+                <option>Anchorage</option>
+                <option>Fairbanks</option>
+                <option>Juneau</option>
+                <option>Sitka</option>
+                <option>Ketchikan</option>
+            </optgroup>
+            <optgroup label="Arizona">
+                <option>Phoenix</option>
+                <option>Tucson</option>
+                <option>Mesa</option>
+                <option>Chandler</option>
+                <option>Glendale</option>
+            </optgroup>
+            <optgroup label="Arkansas">
+                <option>Little Rock</option>
+                <option>Fort Smith</option>
+                <option>Fayetteville</option>
+                <option>Springdale</option>
+                <option>Jonesboro</option>
+            </optgroup>
+            <optgroup label="California">
+                <option>Los Angeles</option>
+                <option>San Diego</option>
+                <option>San Jose</option>
+                <option>San Francisco</option>
+                <option>Fresno</option>
+            </optgroup>
+            <optgroup label="Colorado">
+                <option>Denver</option>
+                <option>Colorado</option>
+                <option>Aurora</option>
+                <option>Fort Collins</option>
+                <option>Lakewood</option>
+            </optgroup>
+            <optgroup label="Connecticut">
+                <option>Bridgeport</option>
+                <option>New Haven</option>
+                <option>Hartford</option>
+                <option>Stamford</option>
+                <option>Waterbury</option>
+            </optgroup>
+            <optgroup label="Delaware">
+                <option>Wilmington</option>
+                <option>Dover</option>
+                <option>Newark</option>
+                <option>Bear</option>
+                <option>Middletown</option>
+            </optgroup>
+            <optgroup label="Florida">
+                <option>Jacksonville</option>
+                <option>Miami</option>
+                <option>Tampa</option>
+                <option>St. Petersburg</option>
+                <option>Orlando</option>
+            </optgroup>
+            <optgroup label="Georgia">
+                <option>Atlanta</option>
+                <option>Augusta</option>
+                <option>Columbus</option>
+                <option>Savannah</option>
+                <option>Athens</option>
+            </optgroup>
+            <optgroup label="Hawaii">
+                <option>Honolulu</option>
+                <option>Pearl City</option>
+                <option>Hilo</option>
+                <option>Kailua</option>
+                <option>Waipahu</option>
+            </optgroup>
+            <optgroup label="Idaho">
+                <option>Boise</option>
+                <option>Nampa</option>
+                <option>Meridian</option>
+                <option>Idaho Falls</option>
+                <option>Pocatello</option>
+            </optgroup>
+            <optgroup label="Illinois">
+                <option>Chicago</option>
+                <option>Aurora</option>
+                <option>Rockford</option>
+                <option>Joliet</option>
+                <option>Naperville</option>
+            </optgroup>
+            <optgroup label="Indiana">
+                <option>Indianapolis</option>
+                <option>Fort Wayne</option>
+                <option>Evansville</option>
+                <option>South Bend</option>
+                <option>Hammond</option>
+            </optgroup>
+            <optgroup label="Iowa">
+                <option>Des Moines</option>
+                <option>Cedar Rapids</option>
+                <option>Davenport</option>
+                <option>Sioux City</option>
+                <option>Waterloo</option>
+            </optgroup>
+            <optgroup label="Kansas">
+                <option>Wichita</option>
+                <option>Overland Park</option>
+                <option>Kansas City</option>
+                <option>Topeka</option>
+                <option>Olathe </option>
+            </optgroup>
+            <optgroup label="Kentucky">
+                <option>Louisville</option>
+                <option>Lexington</option>
+                <option>Bowling Green</option>
+                <option>Owensboro</option>
+                <option>Covington</option>
+            </optgroup>
+            <optgroup label="Louisiana">
+                <option>New Orleans</option>
+                <option>Baton Rouge</option>
+                <option>Shreveport</option>
+                <option>Metairie</option>
+                <option>Lafayette</option>
+            </optgroup>
+            <optgroup label="Maine">
+                <option>Portland</option>
+                <option>Lewiston</option>
+                <option>Bangor</option>
+                <option>South Portland</option>
+                <option>Auburn</option>
+            </optgroup>
+            <optgroup label="Maryland">
+                <option>Baltimore</option>
+                <option>Frederick</option>
+                <option>Rockville</option>
+                <option>Gaithersburg</option>
+                <option>Bowie</option>
+            </optgroup>
+            <optgroup label="Massachusetts">
+                <option>Boston</option>
+                <option>Worcester</option>
+                <option>Springfield</option>
+                <option>Lowell</option>
+                <option>Cambridge</option>
+            </optgroup>
+            <optgroup label="Michigan">
+                <option>Detroit</option>
+                <option>Grand Rapids</option>
+                <option>Warren</option>
+                <option>Sterling Heights</option>
+                <option>Lansing</option>
+            </optgroup>
+            <optgroup label="Minnesota">
+                <option>Minneapolis</option>
+                <option>St. Paul</option>
+                <option>Rochester</option>
+                <option>Duluth</option>
+                <option>Bloomington</option>
+            </optgroup>
+            <optgroup label="Mississippi">
+                <option>Jackson</option>
+                <option>Gulfport</option>
+                <option>Southaven</option>
+                <option>Hattiesburg</option>
+                <option>Biloxi</option>
+            </optgroup>
+            <optgroup label="Missouri">
+                <option>Kansas City</option>
+                <option>St. Louis</option>
+                <option>Springfield</option>
+                <option>Independence</option>
+                <option>Columbia</option>
+            </optgroup>
+            <optgroup label="Montana">
+                <option>Billings</option>
+                <option>Missoula</option>
+                <option>Great Falls</option>
+                <option>Bozeman</option>
+                <option>Butte-Silver Bow</option>
+            </optgroup>
+            <optgroup label="Nebraska">
+                <option>Omaha</option>
+                <option>Lincoln</option>
+                <option>Bellevue</option>
+                <option>Grand Island</option>
+                <option>Kearney</option>
+            </optgroup>
+            <optgroup label="Nevada">
+                <option>Las Vegas</option>
+                <option>Henderson</option>
+                <option>North Las Vegas</option>
+                <option>Reno</option>
+                <option>Sunrise Manor</option>
+            </optgroup>
+            <optgroup label="New Hampshire">
+                <option>Manchesters</option>
+                <option>Nashua</option>
+                <option>Concord</option>
+                <option>Dover</option>
+                <option>Rochester</option>
+            </optgroup>
+            <optgroup label="New Jersey">
+                <option>Newark</option>
+                <option>Jersey City</option>
+                <option>Paterson</option>
+                <option>Elizabeth</option>
+                <option>Edison</option>
+            </optgroup>
+            <optgroup label="New Mexico">
+                <option>Albuquerque</option>
+                <option>Las Cruces</option>
+                <option>Rio Rancho</option>
+                <option>Santa Fe</option>
+                <option>Roswell</option>
+            </optgroup>
+            <optgroup label="New York">
+                <option>New York</option>
+                <option>Buffalo</option>
+                <option>Rochester</option>
+                <option>Yonkers</option>
+                <option>Syracuse</option>
+            </optgroup>
+            <optgroup label="North Carolina">
+                <option>Charlotte</option>
+                <option>Raleigh</option>
+                <option>Greensboro</option>
+                <option>Winston-Salem</option>
+                <option>Durham</option>
+            </optgroup>
+            <optgroup label="North Dakota">
+                <option>Fargo</option>
+                <option>Bismarck</option>
+                <option>Grand Forks</option>
+                <option>Minot</option>
+                <option>West Fargo</option>
+            </optgroup>
+            <optgroup label="Ohio">
+                <option>Columbus</option>
+                <option>Cleveland</option>
+                <option>Cincinnati</option>
+                <option>Toledo</option>
+                <option>Akron</option>
+            </optgroup>
+            <optgroup label="Oklahoma">
+                <option>Oklahoma City</option>
+                <option>Tulsa</option>
+                <option>Norman</option>
+                <option>Broken Arrow</option>
+                <option>Lawton</option>
+            </optgroup>
+            <optgroup label="Oregon">
+                <option>Portland</option>
+                <option>Eugene</option>
+                <option>Salem</option>
+                <option>Gresham</option>
+                <option>Hillsboro</option>
+            </optgroup>
+            <optgroup label="Pennsylvania">
+                <option>Philadelphia</option>
+                <option>Pittsburgh</option>
+                <option>Allentown</option>
+                <option>Erie</option>
+                <option>Reading</option>
+            </optgroup>
+            <optgroup label="Rhode Island">
+                <option>Providence</option>
+                <option>Warwick</option>
+                <option>Cranston</option>
+                <option>Pawtucket</option>
+                <option>East Providence</option>
+            </optgroup>
+            <optgroup label="South Carolina">
+                <option>Columbia</option>
+                <option>Charleston</option>
+                <option>North Charleston</option>
+                <option>Mount Pleasant</option>
+                <option>Rock Hill</option>
+            </optgroup>
+            <optgroup label="South Dakota">
+                <option>Sioux Falls</option>
+                <option>Rapid City</option>
+                <option>Aberdeen</option>
+                <option>Brookings</option>
+                <option>Watertown</option>
+            </optgroup>
+            <optgroup label="Tennessee">
+                <option>Memphis</option>
+                <option>Nashville</option>
+                <option>Knoxville</option>
+                <option>Chattanooga</option>
+                <option>Clarksville</option>
+            </optgroup>
+            <optgroup label="Texas">
+                <option>Houston</option>
+                <option>San Antonio</option>
+                <option>Dallas</option>
+                <option>Austin</option>
+                <option>Fort Worth</option>
+            </optgroup>
+            <optgroup label="Utah">
+                <option>Salt Lake City</option>
+                <option>West Valley City</option>
+                <option>Provo</option>
+                <option>West Jordan</option>
+                <option>Orem</option>
+            </optgroup>
+            <optgroup label="Vermont">
+                <option>Burlington</option>
+                <option>Essex</option>
+                <option>South Burlington</option>
+                <option>Colchester</option>
+                <option>Rutland</option>
+            </optgroup>
+            <optgroup label="Virginia">
+                <option>Virginia Beach</option>
+                <option>Norfolk</option>
+                <option>Chesapeake</option>
+                <option>Arlington</option>
+                <option>Richmond</option>
+            </optgroup>
+            <optgroup label="Washington">
+                <option>Seattle</option>
+                <option>Spokane</option>
+                <option>Tacoma</option>
+                <option>Vancouver</option>
+                <option>Bellevue</option>
+            </optgroup>
+            <optgroup label="West Virginia">
+                <option>Charleston</option>
+                <option>Huntington</option>
+                <option>Parkersburg</option>
+                <option>Morgantown</option>
+                <option>Wheeling</option>
+            </optgroup>
+            <optgroup label="Wisconsin">
+                <option>Milwaukee</option>
+                <option>Madison</option>
+                <option>Green Bay</option>
+                <option>Kenosha</option>
+                <option>Racine</option>
+            </optgroup>
+            <optgroup label="Wyoming">
+                <option>Cheyenne</option>
+                <option>Casper</option>
+                <option>Laramie</option>
+                <option>Gillette</option>
+                <option>Rock Springs</option>
+            </optgroup>
+        </select>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //shop locator (popup) -->
+<!-- modals -->
+<!-- log in -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">Log In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="LoginForm" @*action="@Url.Action("Login","Home")"*@>
+                    <div class="form-group">
+                        <label class="col-form-label">Email</label>
+                        <input type="email" class="form-control" placeholder=" " name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Password</label>
+                        <input type="password" class="form-control" placeholder=" " name="password" id="password">
+                    </div>
+                    @*<div class="right-w3l">
+            <button class="loginBtn loginBtn--facebook">
+                Login with Facebook
+            </button>
+        </div>
+        <div class="right-w3l">
+            <button class="loginBtn loginBtn--google">
+                Login with Google
+            </button>
+        </div>*@
+                    <div><p id="message_login" class="helpp-block" style="color:red;"></p></div>
+                </form>
+                <div class="right-w3l">
+                    <input type="submit" class="form-control" value="Log in" onclick="LoginUser()">
+                </div>
+                <div class="sub-w3l">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                        <label class="custom-control-label" for="customControlAutosizing">Remember me?</label>
+                    </div>
+                </div>
+                <p class="text-center dont-do mt-3">
+                    Don't have an account?
+                    <a href="" data-toggle="modal" data-target="#exampleModal2">
+                        Register Now
+                    </a>
+                </p>
+            </div>
+            <script>
+                function LoginUser() {
+                    var email = $("#email").val();
+                    var password = $("#password").val();
+                    if (email == "" || password == "") {
+                        document.getElementById("message_login").innerHTML = "Do not empty field!";
+                        return false;
+                    }
+                    var data = $("#LoginForm").serialize();
+                    $.ajax({
+                        type: "post",
+                        data: data,
+                        url: "/Home/Login",
+                        success: function (result) {
+                            if (result == "Fail") {
+                                //$("#LoginForm")[0].reset();
+                                document.getElementById("message_login").innerHTML = "Wrong Email or Password!";
+                            }
+                            else {
+                                alert(result);
+                                location.reload(true);
+                            }
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<!-- register -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="Registration" action="@Url.Action("SaveData","Home")">
+                    <style type="text/css">
+                        .helpp-block {
+                            color: red;
+                            font-weight: bold;
+                        }
+                    </style>
+                    <div class="form-group">
+                        <label class="col-form-label">Your Name</label>
+                        <input type="text" class="form-control" placeholder=" " name="fullname" id="fullname">
+                        @*@Html.TextBoxFor(model => model.fullname, new { @id = "name", @class = "form-control" })*@
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Email</label>
+                        <input type="email" class="form-control" placeholder=" " name="email" id="email">
+                        @*@Html.TextBoxFor(model => model.email, new { @id = "email", @class = "form-control", type = "email" })*@
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Password</label>
+                        <input type="password" class="form-control" placeholder=" " name="password" id="password1">
+                        @*@Html.PasswordFor(model => model.password, new { @id = "password1", @class = "form-control" })*@
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder=" " name="password2" id="password2">
+                        @*@Html.PasswordFor(model => model.confirmpassword, new { @id = "password2", @class = "form-control" })*@
+                    </div>
+                    @*<div class="sub-w3l">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
+                    <label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
+                </div>
+            </div>*@
+                    <div><p id="message_register" class="helpp-block" style="color:red;"></p></div>
+                </form>
+                <div class="right-w3l">
+                    <input type="submit" class="form-control" value="Register" onclick="SaveForm()">
+                </div>
+            </div>
+            <script>
+                function SaveForm() {
+                    var name = $("#fullname").val();
+                    var email = $("#email").val();
+                    var password1 = $("#password1").val();
+                    var password2 = $("#password2").val();
+                    if (name == "" || password1 == "" || email == "" || password2 == "") {
+                        document.getElementById("message_register").innerHTML = "Do not empty field!";
+                        return false;
+                    }
+                    if (password1 != password2) {
+                        document.getElementById("message_register").innerHTML = "Passwords Don't Match!";
+                        return false;
+                    }
+                    var data = $("#Registration").serialize();
+                            $.ajax({
+                            type: "post",
+                            data: data,
+                            url: "/Home/SaveData",
+                                success: function (result) {
+                                    //$("#Registration")[0].reset();
+                                    alert(result);
+                                    location.reload(true);
+                            }
+                        });
+                }
+            </script>
+            @*<div class="modal-body">
+            @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <style type="text/css">
+                    .helpp-block {
+                        color: red;
+                        font-weight: bold;
+                    }
+                </style>
+                <div class="form-group">
+                    <label class="col-form-label">Your Name</label>
+                    @Html.TextBoxFor(model => model.fullname, new { @id = "focusedinput", @class = "form-control", placeholder = " " })
+                    <label class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.fullname)</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Email</label>
+                    @Html.TextBoxFor(model => model.email, new { @id = "focusedinput", @class = "form-control", placeholder = " " })
+                    <label class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.email)</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Password</label>
+                    @Html.PasswordFor(model => model.password, new { @id = "password1", @class = "form-control", placeholder = " " })
+                    <label class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.password)</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Confirm Password</label>
+                    @Html.PasswordFor(model => model.confirmpassword, new { @id = "password2", @class = "form-control", placeholder = " " })
+                    <label class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.confirmpassword)</label>
+                </div>
+                <div class="right-w3l">
+                    <input type="submit" class="form-control" value="Register">
+                </div>
+                <div class="sub-w3l">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
+                        <label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
+                    </div>
+                </div>
+            }
+        </div>*@
+        </div>
+    </div>
+</div>
+<!-- //modal -->
+<!-- //top-header -->
+<!-- header-bottom-->
+<div class="header-bot">
+    <div class="container">
+        <div class="row header-bot_inner_wthreeinfo_header_mid">
+            <!-- logo -->
+            <div class="col-md-3 logo_agile">
+                <h1 class="text-center">
+                    <a href="@Url.Action("Index","Home")" class="font-weight-bold font-italic">
+                        <img src="/Public/images/logo2.png" alt=" " class="img-fluid">Electro Store
+                    </a>
+                </h1>
+            </div>
+            <!-- //logo -->
+            <!-- header-bot -->
+            <div class="col-md-9 header mt-4 mb-md-0 mb-4">
+                <div class="row">
+                    <!-- search -->
+                    <div class="col-10 agileits_search">
+                        <form class="form-inline" action="@Url.Action("Search","Home")" method="get">
+                            <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                    @*@using(Html.BeginForm("Search", "Home", FormMethod.Get, new { @class="form-inline" }))
+                        {
+                            @Html.TextBox("keyword", null, new { @class = "form-control mr-sm-2" , @placeholder="Search"})
+                        }*@
+                    <!-- //search -->
+                    <!-- cart details -->
+                    <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
+                        <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                            <form action="@Url.Action("Cart", "Home")" method="post" class="last">
+                                <button class="btn w3view-cart" type="submit" name="submit" value="">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //cart details -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- shop locator (popup) -->
+<!-- //header-bottom -->
+<!-- navigation -->
+<div class="navbar-inner">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            @*<div class="agileits-navi_search">
+                        <form action="#" method="post">
+                            <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
+                    <option value="">All Categories</option>
+                    <option value="Televisions">Televisions</option>
+                    <option value="Headphones">Headphones</option>
+                    <option value="Computers">Computers</option>
+                    <option value="Appliances">Appliances</option>
+                    <option value="Mobiles">Mobiles</option>
+                    <option value="Fruits &amp; Vegetables">Tv &amp; Video</option>
+                    <option value="iPad & Tablets">iPad & Tablets</option>
+                    <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                    <option value="Home Audio & Theater">Home Audio & Theater</option>
+                </select>
+                            @Html.DropDownListFor(model => model.id, ViewBag.categorys as SelectList, "All Categories", new { @id = "agileinfo-nav_search", @class = "border" })
+                        </form>
+                    </div>*@
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto text-center mr-xl-5">
+                    <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link" href="@Url.Action("Index","Home")">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link" href="@Url.Action("Product","Home")">Accessories</a>
+                    </li>
+                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu">
+                            @foreach (var cat in ViewBag.categories)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Detail_Category","Home",new { id = cat.id })">@cat.name</a>
+                            }
+                        </div>
+                    </li>
+                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
+                    </li>
+                    @*<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pages
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="product.html">Product 1</a>
+                                <a class="dropdown-item" href="product2.html">Product 2</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="single.html">Single Product 1</a>
+                                <a class="dropdown-item" href="single2.html">Single Product 2</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="checkout.html">Checkout Page</a>
+                                <a class="dropdown-item" href="payment.html">Payment Page</a>
+                            </div>
+                        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact_Us","Home")">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Electronics
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="agile_inner_drop_nav_info p-4">
+                                @*<h5 class="mb-3">Mobiles, Computers</h5>*@
+                                <div class="row">
+                                    <div class="col-sm-6 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            @*<li>
+                                                    <a href="#">All Mobile Phones</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">All Mobile Accessories</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Cases & Covers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Screen Protectors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Power Banks</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">All Certified Refurbished</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Tablets</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Wearable Devices</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Smart Home</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            @*<li>
+                                                    <a href="">Laptops</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Drives & Storage</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Printers & Ink</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Networking Devices</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Computer Accessories</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Game Zone</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Software</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Appliances
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="agile_inner_drop_nav_info p-4">
+                                @*<h5 class="mb-3">TV, Appliances, Electronics</h5>*@
+                                <div class="row">
+                                    <div class="col-sm-6 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            @*<li>
+                                                    <a href="">Televisions</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Home Entertainment Systems</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Headphones</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Speakers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">MP3, Media Players & Accessories</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Audio & Video Accessories</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Cameras</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">DSLR Cameras</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Camera Accessories</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            @*<li>
+                                                    <a href="">Musical Instruments</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Gaming Consoles</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">All Electronics</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Air Conditioners</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Refrigerators</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Washing Machines</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Kitchen & Home Appliances</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">Heating & Cooling Appliances</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">All Appliances</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- //navigation -->

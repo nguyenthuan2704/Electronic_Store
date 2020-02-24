@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="tables">
+                <h2 class="title1">Category Management</h2>
+                <div class="table-responsive bs-example widget-shadow">
+                    <a href="@Url.Action("Add_Category","Category")" class="btn btn-info">Add New</a>
+                    <h4 style="text-align:center">Category List:</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Category Name</th>
+                                <th>Status</th>
+                                <th colspan="2">Option</th>
+                            </tr>
+                        </thead>
+                        @foreach (var cat in ViewBag.categorys)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@cat.name</td>
+                                    <td>@(cat.status ? "Active" : "Deactive")</td>
+                                    <td><a href="@Url.Action("Update_Category", "Category", new { id = cat.id })" class="btn btn-warning">Update</a></td>
+                                    <td><a href="@Url.Action("Delete_Category", "Category", new { id = cat.id })" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+

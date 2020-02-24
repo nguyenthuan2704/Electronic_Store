@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f24f2f59c574178a6d195cd4625c3fc" Name="Diagram1">
+        <EntityTypeShape EntityType="electronic_storeModel.category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="electronic_storeModel.contact" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="electronic_storeModel.product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="electronic_storeModel.upload_images" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="electronic_storeModel.FK__product__categor__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="electronic_storeModel.FK__upload_im__produ__239E4DCF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="electronic_storeModel.user" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="electronic_storeModel.customer" Width="1.5" PointX="5.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

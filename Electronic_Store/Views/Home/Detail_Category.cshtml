@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Detail_Category";
+    Layout = "~/Views/Share/_LayoutPageHomePage.cshtml";
+}
+@model PagedList.IPagedList<Electronic_Store.Models.product>
+@using PagedList.Mvc;
+<style type="text/css">
+    .paginations {
+        display: inline-block;
+    }
+
+        .paginations a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+            .paginations a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
+
+            .paginations a:hover:not(.active) {
+                background-color: #F45C5D;
+            }
+</style>
+<!-- banner-2 -->
+<div class="page-head_agile_info_w3l page-head_agile_info_w3l-2">
+
+</div>
+<!-- //banner-2 -->
+<!-- page -->
+<div class="services-breadcrumb">
+    <div class="agile_inner_breadcrumb">
+        <div class="container">
+            <ul class="w3_short">
+                <li>
+                    <a href="index.html">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Appliances</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- //page -->
+<!-- top Products -->
+<div class="ads-grid  py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+            <span>C</span>omputer
+            <span>&</span>
+            <span>A</span>ccessories
+        </h3>
+        <!-- //tittle heading -->
+        <div class="row">
+            <!-- product left -->
+            <div class="agileinfo-ads-display col-lg-9">
+                <div class="wrapper">
+                    <!-- fourth section -->
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-4 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item text-center">
+                                            <img src="/Public/images/@item.images" alt="" class="img-fluid">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="@Url.Action("Detail","Home",new { id = item.id })" class="link-product-add-cart">Quick View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product text-center border-top mt-4">
+                                            <h4 class="pt-1">
+                                                <a href="@Url.Action("Detail","Home",new { id = item.id })">@item.name</a>
+                                            </h4>
+                                            <div class="info-product-price my-2">
+                                                <span class="item_price">@string.Format("{0:#,#.##}", item.price)đ</span>
+                                                @*<del>$549.00</del>*@
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <a class="button2" href="@Url.Action("Buy","Home",new { id = item.id })">Add to cart</a>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            @*<span class="product-new-top">New</span>*@
+                                            @*<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+            <form action="#" method="post">
+                <fieldset>
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="add" value="1" />
+                    <input type="hidden" name="business" value=" " />
+                    <input type="hidden" name="item_name" value="Dry Iron" />
+                    <input type="hidden" name="amount" value="449.00" />
+                    <input type="hidden" name="discount_amount" value="449.00" />
+                    <input type="hidden" name="currency_code" value="USD" />
+                    <input type="hidden" name="return" value=" " />
+                    <input type="hidden" name="cancel_return" value=" " />
+                    <input type="submit" name="submit" value="Add to cart" class="button btn" />
+                </fieldset>
+            </form>
+        </div>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="paginations">
+                        @Html.PagedListPager(Model, page => Url.Action("Product", new { page, pageSize = Model.PageSize, @class = "paginations" }))
+                        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Products
+                    </div>
+                    <!-- //fourth section -->
+                </div>
+            </div>
+            <!-- //product left -->
+            <!-- product right -->
+            @Html.Partial("Menu_Right")
+            <!-- //product right -->
+        </div>
+    </div>
+</div>
+<!-- //top products -->

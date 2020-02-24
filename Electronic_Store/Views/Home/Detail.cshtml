@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Share/_LayoutPageHomePage.cshtml";
+}
+@model Electronic_Store.Models.product
+@using Electronic_Store.Models
+<script>
+    addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+</script>
+<!-- //Meta tag Keywords -->
+<!-- Custom-Files -->
+<link href="~/Public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Bootstrap css -->
+<link href="~/Public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Main css -->
+<link rel="stylesheet" href="~/Public/css/fontawesome-all.css">
+<!-- Font-Awesome-Icons-CSS -->
+<link href="~/Public/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<!-- pop-up-box -->
+<link href="~/Public/css/menu.css" rel="stylesheet" type="text/css" media="all" />
+<!-- menu style -->
+<!-- //Custom-Files -->
+<!-- web fonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+      rel="stylesheet">
+<!-- //web fonts -->
+<!-- banner-2 -->
+<div class="page-head_agile_info_w3l">
+
+</div>
+<!-- //banner-2 -->
+<!-- page -->
+<div class="services-breadcrumb">
+    <div class="agile_inner_breadcrumb">
+        <div class="container">
+            <ul class="w3_short">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Detail Product</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- //page -->
+<!-- Single Page -->
+<div class="banner-bootom-w3-agileits py-5">
+    <div class="container py-xl-4 py-lg-2">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+            <span>D</span>etail
+            <span>P</span>roduct
+        </h3>
+        <!-- //tittle heading -->
+        <div class="row">
+            <div class="col-lg-5 col-md-8 single-right-left ">
+                <div class="grid images_3_of_2">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            @foreach (var images in ViewBag.images)
+                            {
+                            <li data-thumb="/Public/images/@images.url_images">
+                                <div class="thumb-image">
+                                    <img src="/Public/images/@images.url_images" class="img-fluid" data-imagezoom="true" />
+                                </div>
+                            </li>
+                            }
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-5 col-md-8 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="/Public/images/si1.jpg">
+                            <div class="thumb-image">
+                                <img src="/Public/images/si1.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                                <img src="/Public/images/@Html.DisplayFor(model =>model.images)" class="img-fluid" data-imagezoom="true"/>
+                            </div>
+                        </li>
+                        <li data-thumb="/Public/images/si2.jpg">
+                            <div class="thumb-image">
+                                <img src="/Public/images/si2.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                            </div>
+                        </li>
+                        <li data-thumb="/Public/images/si3.jpg">
+                            <div class="thumb-image">
+                                <img src="/Public/images/si3.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>*@
+
+            <div class="col-lg-7 single-right-left simpleCart_shelfItem">
+                @*<h3 class="mb-3">Samsung Galaxy J7 Prime (Gold, 16 GB) (3 GB RAM)</h3>*@
+                <h3 class="mb-3">@Html.DisplayFor(model => model.name)</h3>
+                <p class="mb-3">
+                    @*<span class="item_price">$200.00</span>*@
+                    <span class="item_price">@Html.DisplayFor(model => model.price)</span>
+                    @*<del class="mx-2 font-weight-light">$280.00</del>*@
+                    <label>Free delivery</label>
+                </p>
+                <div class="single-infoagile">
+                    <ul>
+                        <li class="mb-3">
+                            Cash on Delivery Eligible.
+                        </li>
+                        <li class="mb-3">
+                            Shipping Speed to Delivery.
+                        </li>
+                        <li class="mb-3">
+                            EMIs from $655/month.
+                        </li>
+                        <li class="mb-3">
+                            Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-single-w3l">
+                    <p class="my-3">
+                        <i class="far fa-hand-point-right mr-2"></i>
+                        <label>1 Year</label>Manufacturer Warranty
+                    </p>
+                    <ul>
+                        <li class="mb-1">
+                            3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
+                        </li>
+                        <li class="mb-1">
+                            5.5 inch Full HD Display
+                        </li>
+                        <li class="mb-1">
+                            13MP Rear Camera | 8MP Front Camera
+                        </li>
+                        <li class="mb-1">
+                            3300 mAh Battery
+                        </li>
+                        <li class="mb-1">
+                            Exynos 7870 Octa Core 1.6GHz Processor
+                        </li>
+                    </ul>
+                    <p class="my-sm-4 my-3">
+                        <i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+                    </p>
+                </div>
+                <div class="occasion-cart">
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                        <form action="@Url.Action("Buy", "Home")" method="post">
+                            <fieldset>
+                                @Html.HiddenFor(model => model.id)
+                                <input type="submit" name="submit" value="Add to cart" class="button" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //Single Page -->

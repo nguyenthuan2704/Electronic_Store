@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Update_Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+@model Electronic_Store.Models.product
+<div id="page-wrapper">
+    <div class="main-page">
+        <div class="forms">
+            <div class="row">
+                <h3 class="title1">Update Product:</h3>
+                <div class="form-three widget-shadow">
+                    @using (Html.BeginForm("Update_Product", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                    {
+                        <style type="text/css">
+                            .helpp-block{
+                                font-weight:bold;
+                            }
+                        </style>
+                        <div class="form-group has-error">
+                            <label for="focusedinput" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-8">
+                                @*<input type="text" class="form-control1" id="focusedinput" placeholder="Default Input">*@
+                                @Html.TextBoxFor(model => model.name, new { @id = "focusedinput", @class = "form-control1" })
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.name)</p>
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="focusedinput" class="col-sm-2 control-label">Price</label>
+                            <div class="col-sm-8">
+                                @*<input type="text" class="form-control1" id="focusedinput" placeholder="Default Input">*@
+                                @*@Html.TextBoxFor(model => model.price, new { @id = "focusedinput", @class = "form-control1" })*@
+                                @Html.HiddenFor(model => model.price, new { @id = "focusedinput", @class = "form-control1" })
+                                @Html.TextBoxFor(model => model.price, "{0:#,#.##}", new { @id = "focusedinput", @class = "form-control1" })
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.price)</p>
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="txtarea1" class="col-sm-2 control-label">Descriptions</label>
+                            <div class="col-sm-8">
+                                @*<textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea>*@
+                                @Html.TextAreaFor(model => model.descriptions, new { @id = "txtarea1", @class = "form-control1", @cols = "50", @rows = "4" })
+                            </div>
+                        </div>
+                        @*<div class="form-group has-error">
+                                <label for="selector1" class="col-sm-2 control-label">Category</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(model => model.category_id, ViewBag.categorys as SelectList, "Please choose category")
+                                </div>
+                            </div>*@
+                        <div class="form-group has-error">
+                            <label for="focusedinput" class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-8">
+                                @*@Html.DisplayFor(model => model.category.name)*@
+                                @Html.DropDownListFor(model => model.category_id, ViewBag.categorys as SelectList, "Please choose category", new { @id = "selector1", @class = "form-control1" })
+                                <p class="helpp-block" style="color:red;">@Html.ValidationMessageFor(model => model.category_id)</p>
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="radio" class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-8">
+                                <div class="radio block"><label>@Html.RadioButtonFor(model => model.status, true) Checked</label></div>
+                                <div class="radio block"><label>@Html.RadioButtonFor(model => model.status, false) Unchecked</label></div>
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="exampleInputFile" class="col-sm-2 control-label">Upload Images</label>
+                            <div class="col-sm-8">
+                                @Html.HiddenFor(model => model.images, new { @id = "focusedinput", @class = "form-control1" })
+                                @Html.DisplayFor(model => model.images, new { @id = "focusedinput", @class = "form-control1" })
+                                @*@Html.TextBoxFor(model => model.images, new { @id = "focusedinput", @class = "form-control1" })*@
+                                <img src="~/Public/images/@Url.Content(Model.images)" width="150px" height="150px" />
+                                <input type="file" id="exampleInputFile" name="photo"> @*<p class="help-block">Error!</p>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

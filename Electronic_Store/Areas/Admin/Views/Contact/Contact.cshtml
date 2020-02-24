@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="tables">
+                <h2 class="title1">Contact Management</h2>
+                <div class="table-responsive bs-example widget-shadow">
+                    @*<a href="@Url.Action("Contact","Category")" class="btn btn-info">Add New</a>*@
+                    <h4 style="text-align:center">Contact List:</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Content</th>
+                                <th>Date created</th>
+                                <th>Status</th>
+                                <th colspan="2">Option</th>
+                            </tr>
+                        </thead>
+                        @foreach (var con in ViewBag.contact)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@con.fullname</td>
+                                    <td>@con.email</td>
+                                    <td>@con.content</td>
+                                    <td>@con.created_at</td>
+                                    <td>@(con.status ? "Unread" : "Readed")</td>
+                                    <td><a href="@Url.Action("Detail_Contact", "Contact", new { id = con.id })" class="btn btn-warning">Detail</a></td>
+                                    <td><a href="@Url.Action("Delete_Contact", "Contact", new { id = con.id })" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+

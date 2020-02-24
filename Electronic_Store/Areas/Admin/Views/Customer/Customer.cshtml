@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="tables">
+                <h2 class="title1">Customer Management</h2>
+                <div class="table-responsive bs-example widget-shadow">
+                    <h4 style="text-align:center">Customer List:</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>FullName</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th colspan="2">Option</th>
+                            </tr>
+                        </thead>
+                        @foreach (var cus in ViewBag.customers)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@cus.fullname</td>
+                                    <td>@cus.email</td>
+                                    <td>@(cus.status ? "Active" : "Deactive")</td>
+                                    <td><a href="@Url.Action("Delete_Customer", "Customer", new { id = cus.id })" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+

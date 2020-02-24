@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="tables">
+                <h2 class="title1">User Management</h2>
+                <div class="table-responsive bs-example widget-shadow">
+                    <a href="@Url.Action("Add_User","User")" class="btn btn-info">Add New</a>
+                    <h4 style="text-align:center">User List:</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>FullName</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Status</th>
+                                <th colspan="2">Option</th>
+                            </tr>
+                        </thead>
+                        @foreach (var us in ViewBag.user)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Areas/Admin/Assets/images/@us.images" width="100px" height="100px" /></td>
+                                    <td>@us.fullname</td>
+                                    <td>@us.username</td>
+                                    <td>@us.password</td>
+                                    <td>@us.email</td>
+                                    <td>@(us.gender ? "Male" : "Female")</td>
+                                    <td>@(us.status ? "Active" : "Deactive")</td>
+                                    <td><a href="@Url.Action("Delete_User", "User", new { id = us.id })" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
